@@ -1,11 +1,3 @@
 #+DATE: <2019-01-07 Mon>
 
 * list: [100%]
-** DONE 3n+1
-** DONE maxsocre
-** DONE findx
-** DONE image_output
-** DONE date_process
-** DONE BinHexOct
-** DONE palindrome
-** DONE reverse_words
