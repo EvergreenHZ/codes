@@ -27,11 +27,17 @@ bool cmp1(const Stu& s1, const Stu& s2) {
 bool cmp2(const Stu& s1, const Stu &s2) {
         if (s1.name != s2.name)
                 return s1.name < s2.name;
+        else {
+                return s1.id_s < s2.id_s;
+        }
 }
 
 bool cmp3(const Stu& s1, const Stu& s2) {
         if (s1.grade != s2.grade)
                 return s1.grade < s2.grade;
+        else {
+                return s1.id_s < s2.id_s;
+        }
 }
 
 void print_vec(vector<Stu> &v) {
