@@ -48,6 +48,13 @@ void Union(int* father, int N) {
         }
 }
 
+void print_father(int* father, int N) {
+        for (int i = 0; i < N; i++) {
+                cout << father[i] << " ";
+        }
+        cout << endl;
+}
+
 int main() {
         int N;
         scanf("%d", &N);
