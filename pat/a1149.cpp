@@ -1,10 +1,22 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <map>
+#include <unordered_map>
+
+struct pair_hash {
+    template <class T1, class T2>
+    std::size_t operator () (const std::pair<T1,T2> &p) const {
+        auto h1 = std::hash<T1>{}(p.first);
+        auto h2 = std::hash<T2>{}(p.second);
+
+        // Mainly for demonstration purposes, i.e. works but is overly simple
+        // In the real world, use sth. like boost.hash_combine
+        return h1 ^ h2;  
+    }
+};
 
 using namespace std;
-map<pair<int, int>, int> map_inc;
+unordered_map<pair<int, int>, int, pair_hash> map_inc;
 
 bool is_compatible(int x, int y) {
         if (map_inc.find(pair<int, int>(x, y)) == map_inc.end() ||
@@ -62,9 +74,9 @@ int main() {
         /* process it */
         for (int i = 0; i < test_cases.size(); i++) {
                 if (predict(test_cases[i])) {
-                        cout << "YES" << endl;
+                        cout << "Yes" << endl;
                 } else {
-                        cout << "NO" <<endl;
+                        cout << "No" <<endl;
                 }
         }
         return 0;
