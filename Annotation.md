@@ -91,3 +91,11 @@ if (flag && limit == j):
 # find_and_union 务必初始化!!!!!
 
 # 输出大小写
+
+# 审题第一， 注意题目给的数据范围
+printf: output->stdout
+scanf: input->variable
+sprintf: output->string
+sscanf: string->variable
+
+# 没有什么比数组下表映射更快的 a1149

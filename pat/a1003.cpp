@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <vector>
 
+using namespace std;
 const int INF = 1000000;
 const int MAXN = 510;
 int N, M;
@@ -33,7 +34,7 @@ void init() {
         for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                         if (G[i][j] == 0) G[i][j] = INF;
-                                                  }
+                }
         }
         num[C1] = 1;
         for (int i = 0; i < N; i++) {
@@ -43,10 +44,36 @@ void init() {
         weights[C1] = rescue_teams[C1];
 }
 
-void dijstra_walk(int s, int end) {
-        
+void dijstra(int s) {
+        for (int i = 0; i < N; i++) {  // do n times
+                int u = -1, min = INF;
+                for (int j = 0; j < N; j++) {
+                        if (vis[j] == false && dist[j] < min) {
+                                u = j;
+                                min = dist[j];
+                        }
+                }
+                if (u == -1) return;  // no node can be reached to s
+                vis[u] = true;
+                for (int v = 0; v < N; v++) {
+                        if (vis[v] == false && G[u][v] != INF) {
+                                if (dist[u] + G[u][v] < dist[v]) {
+                                        dist[v] = dist[u] + G[u][v];
+                                        num[v] = num[u];
+                                        weights[v] = weights[u] + rescue_teams[v];
+                                } else if(dist[u] + G[u][v] == dist[v]) {
+                                        num[v] ++;
+                                        if (weights[v] < weights[u] + rescue_teams[v]) {
+                                                weights[v] = weights[u] + rescue_teams[v];
+                                        }
+                                }
+                        }
+                }
+        }
 }
 
 int main() {
         init();
+        dijstra(C1);
+        cout << num[C2] << " " <<weights[C2] << endl;
 }
