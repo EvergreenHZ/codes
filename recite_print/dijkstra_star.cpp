@@ -49,7 +49,6 @@ void dijstra(int s) {
                 }
                 if (u == -1) return;  // no node can be reached to s
                 vis[u] = true;
-                // do relaxation
                 for (int v = 0; v < N; v++) {
                         if (vis[v] == false && G[u][v] != INF) {
                                 if (dist[u] + G[u][v] < dist[v]) {
