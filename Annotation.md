@@ -110,7 +110,7 @@ fill(G[0], G[0] + MAXN * MAXN, INF);
 ```C
 #include <cstring>
 char s[100];
-getline(s, 100, stdin);
+fgets(s, 100, stdin);
 char *p = strchr(s, '\n');
 *p = '\0';
 ```

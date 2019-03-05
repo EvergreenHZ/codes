@@ -7,12 +7,12 @@
 using namespace std;
 
 class Node {
-public:
-        int key;  // suppose all keys are unique
-        Node* left, *right;
+        public:
+                int key;  // suppose all keys are unique
+                Node* left, *right;
 
-        Node(): key(-1), left(NULL), right(NULL) {}
-        Node(int k): key(k), left(NULL), right(NULL) {}
+                Node(): key(-1), left(NULL), right(NULL) {}
+                Node(int k): key(k), left(NULL), right(NULL) {}
 };
 
 void pre_order(Node* root) {
@@ -53,6 +53,7 @@ void level_order(Node* root) {
         nodes.push(root);
         while (!nodes.empty()) {
                 Node* t = nodes.front();
+                // access t here
                 nodes.pop();
                 if (t->left)
                         nodes.push(t->left);
@@ -77,14 +78,13 @@ void level_order_vec(Node* root, vector<int> &v) {
                         nodes.push(t->right);
                 v.push_back(t->key);
         }
-}
 
-        for (int i = 0; i < v.size(); i++) {
-                if (v[i] == x) {
-                        return i;
-                }
-        }
-        return -1;
+        //for (int i = 0; i < v.size(); i++) {
+        //        if (v[i] == x) {
+        //                return i;
+        //        }
+        //}
+        //return -1;
 
 }
 

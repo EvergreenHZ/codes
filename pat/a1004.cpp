@@ -46,6 +46,11 @@ int bfs(Node* root) {
 
 int main() {
         scanf("%d %d", &N_nodes, &M_non_leaf_nodes);
+
+        if (M_non_leaf_nodes == 0) {
+                cout << 1 << endl;
+                return 0;
+        }
         for (int i = 0; i < M_non_leaf_nodes; i++) {
                 int id, k;
                 scanf("%d %d", &id, &k);
@@ -53,7 +58,8 @@ int main() {
                 while (k--) {
                         int child_id;
                         scanf("%d", &child_id);
-                        family[child_id] = new Node(child_id);
+                        if (!family[child_id])
+                                family[child_id] = new Node(child_id);
                         family[id]->childs.push_back(child_id);
                 }
         }
