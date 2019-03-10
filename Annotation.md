@@ -117,3 +117,5 @@ fgets(s, 100, stdin);
 char *p = strchr(s, '\n');
 *p = '\0';
 ```
+
+# 图的初始化，并查集的初始化注意位置，known[], vis[]等

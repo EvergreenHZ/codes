@@ -1,76 +1,76 @@
 #include <cstdio>
 #include <vector>
 #include <algorithm>
-#include <functional>
+#include <queue>
 
 using namespace std;
 
-const int MAXN = 101;
+const int MAXN = 1001;
 class Node {
 public:
+        int key;
+        int left, right;
         int parent;
-        int w;
-        vector<int> childs;
-        Node(): parent(-1), w(0) {}
+        Node(): key(-1), left(-1), right(-1), parent(-1) {}
 };
 
+int inline LEFT(int root) { return root * 2;}
+int inline RIGHT(int root) { return root * 2 + 1;}
 Node nodes[MAXN];
-int N_nodes, M_non_leaves, S;
-vector<vector<int> > path;
+int N;
+vector<int> in_num_seq;
 
-bool cmp(const vector<int> &v1, const vector<int> &v2) {
-        int len = min(v1.size(), v2.size());
-        for (int i = 0; i < len; i++) {
-                if (nodes[v1[i]].w != nodes[v2[i]].w)
-                        return nodes[v1[i]].w > nodes[v2[i]].w;
-        }
-        return true;
-}
-
-void dfs(int root, int current_w, vector<int> &v) {
-        current_w += nodes[root].w;
-        v.push_back(root);
-        if (nodes[root].childs.size() == 0) {  // leaf node
-                if (current_w == S) {
-                        path.push_back(v);
-                };
-                return ;
-        }
-
-        for (int i = 0; i < nodes[root].childs.size(); i++) {
-                vector<int> tmp = v;
-                dfs(nodes[root].childs[i], current_w, tmp);
+void init() {
+        for (int i = 1; i <= N; i++) {
+                int l = LEFT(i);
+                int r = RIGHT(i);
+                if (l > N) l = -1;
+                if (r > N) r = -1;
+                nodes[i].left = l;
+                nodes[i].right = r;
         }
 }
 
-//vector<int> weights;
-void print_path(vector<int> &v) {
-        for (int i = 0; i < v.size(); i++) {
-                printf("%d%c", nodes[v[i]].w, i == v.size() - 1? '\n':' ');
-        }
+void inorder(int root) {
+        if (root == -1) return;
+        inorder(nodes[root].left);
+        in_num_seq.push_back(root);
+        inorder(nodes[root].right);
 }
 
+vector<int> level_seq;
+void level_order() {
+        int root = 1;
+        queue<Node> Q;
+        Q.push(nodes[root]);
+        while (!Q.empty()) {
+                Node &t = Q.front();
+                level_seq.push_back(t.key);
+                Q.pop();
+                if (t.left != -1)
+                        Q.push(nodes[t.left]);
+                if (t.right != -1)
+                        Q.push(nodes[t.right]);
+        }
+}
 int main() {
-        scanf("%d %d %d", &N_nodes, &M_non_leaves, &S);
-        for (int i = 0; i < N_nodes; i++) {
-                scanf("%d", &nodes[i].w);
+        scanf("%d", &N);
+        vector<int> keys;
+        for (int i = 1; i <= N; i++) {
+                int x;
+                scanf("%d", &x);
+                keys.push_back(x);
         }
-        for (int i = 0; i < M_non_leaves; i++) {
-                int id, K, x;
-                scanf("%d %d", &id, &K);
-                for (int j = 0; j < K; j++) {
-                        scanf("%d", &x);
-                        nodes[id].childs.push_back(x);
-                        nodes[x].parent = id;
-                }
-        }
-        vector<int> v;
-        dfs(0, 0, v);
+        sort(keys.begin(), keys.end());
 
-        sort(path.begin(), path.end(), cmp);
-        //sort(path.begin(), path.end(), greater<vector<int> >());
-        for (int i = 0; i < path.size(); i++) {
-                print_path(path[i]);
+        init();
+        inorder(1);
+        for (int i = 0; i < N; i++) {
+                nodes[in_num_seq[i]].key = keys[i];
+        }
+        level_order();
+        for (int i = 0; i < level_seq.size(); i++) {
+                printf("%d%c", level_seq[i], i == level_seq.size() -1 ? '\n':' ');
         }
         return 0;
 }

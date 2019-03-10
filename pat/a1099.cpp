@@ -4,7 +4,6 @@
 #include <algorithm>
 
 using namespace std;
-//#include <
 
 class Node {
 public:
@@ -31,8 +30,10 @@ void read_input() {
                 scanf("%d %d", &l, &r);
                 nodes[i].left = l;
                 nodes[i].right = r;
-                nodes[l].parent = i;
-                nodes[r].parent = i;
+                if (l != -1)
+                        nodes[l].parent = i;
+                if (r != -1)
+                        nodes[r].parent = i;
         }
         for (int i = 0; i < N; i++) {
                 int x;
