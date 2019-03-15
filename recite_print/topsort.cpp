@@ -42,20 +42,16 @@ void all_top_sorts(vector<int> &indgree, vector<bool> &vis, vector<int> &res) {
         }
 
         for (int i = 0; i < nodes_with_0_indegree.size(); i++) {
-                // modify indegree
                 vector<int> t_indegree(indgree);
                 for (int j = 0; j < adj[nodes_with_0_indegree[i]].size(); j++) {
                         t_indegree[adj[nodes_with_0_indegree[i]][j]]--;
                 }
 
-                // set current node visited
                 vector<bool> t_vis(vis);
                 t_vis[nodes_with_0_indegree[i]] = true;
 
-                // push current 0_indegree node
                 vector<int> t_res(res);
                 t_res.push_back(nodes_with_0_indegree[i]);
-                //cout << t_res.size() << endl;
 
                 all_top_sorts(t_indegree, t_vis, t_res);
         }
