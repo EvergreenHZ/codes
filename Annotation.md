@@ -1,3 +1,5 @@
+# **审题，写步骤, 切记！切记！！！**
+
 # 二分， 成绩， 字符串， 图树，DAG
 
 
@@ -101,7 +103,7 @@ scanf: input->variable
 sprintf: output->string
 sscanf: string->variable
 
-# 没有什么比数组下表映射更快的 a1149
+# 没有什么比数组下标映射更快的 a1149
 
 # G[MAXN][MAXN]
 two dimension
@@ -119,3 +121,9 @@ char *p = strchr(s, '\n');
 ```
 
 # 图的初始化，并查集的初始化注意位置，known[], vis[]等
+
+# 树节点以静态方式输入时，注意寻找根节点
+
+# 超时怎么办，复杂度太高，用数组*******
+
+# 怎么说就怎么做
